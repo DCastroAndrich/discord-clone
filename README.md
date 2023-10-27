@@ -3,4 +3,4 @@
 
 ### Sign in & up functioning
 
-min -- 50:09
+min -- 1:46:23
