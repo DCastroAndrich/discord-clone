@@ -1,3 +1,3 @@
 # DISCORD CLONE
 
-min -- 9:43:08
+min -- 11:33:58
