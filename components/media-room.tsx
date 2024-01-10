@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react"
 import { LiveKitRoom, VideoConference } from "@livekit/components-react";
 import "@livekit/components-styles"
-import { Channel } from "@prisma/client";
 import { useUser } from "@clerk/nextjs";
 import { Loader2 } from "lucide-react"
 
@@ -19,9 +18,15 @@ export const MediaRoom = ({ audio, chatId, video }: MediaRoomProps) => {
     const [token, setToken] = useState("")
 
     useEffect(() => {
-        if (!user?.firstName || !user?.lastName) return;
+        if (typeof user?.firstName == "undefined" || typeof user?.lastName == "undefined") return;
 
-        const name = `${user.firstName} ${user.lastName}`;
+        function random4DigitNumber() {
+            // Generate a random number between 1000 and 9999 (inclusive)
+            return Math.floor(Math.random() * 9000) + 1000;
+        }
+
+        const name = `${user.firstName ?? ""} ${user.lastName ?? ""} - ${random4DigitNumber()}`;
+
 
         (async () => {
             try {
@@ -30,7 +35,7 @@ export const MediaRoom = ({ audio, chatId, video }: MediaRoomProps) => {
                 setToken(data.token)
 
             } catch (error) {
-                console.log(error);
+                console.log("ERROR_MEDIA_ROOM", error);
 
             }
         })()
